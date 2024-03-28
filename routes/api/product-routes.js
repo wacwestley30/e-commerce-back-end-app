@@ -33,12 +33,13 @@ router.get('/:id', async (req, res) => {
 // create new product
 router.post('/', async (req, res) => {
   try {
-    const newProduct = await Product.create(req.body);
-    if (req.body.tagIds.length) {
-      const productTagIdArr = req.body.tagIds.map((tag_id) => {
+    const { tags, ...productData } = req.body;
+    const newProduct = await Product.create(productData);
+    if (tags.length) {
+      const productTagIdArr = tags.map((tag) => {
         return {
           product_id: newProduct.id,
-          tag_id,
+          tag_id: tag.id,
         };
       });
 
@@ -54,23 +55,24 @@ router.post('/', async (req, res) => {
 // update product
 router.put('/:id', async (req, res) => {
   try {
-    const updatedProduct = await Product.update(req.body, {
+    const { tags, ...productData } = req.body;
+    const updatedProduct = await Product.update(productData, {
       where: {
         id: req.params.id,
       },
     });
 
-    if (req.body.tagIds && req.body.tagIds.length) {
+    if (tags && tags.length) {
       await ProductTag.destroy({
         where: { 
           product_id: req.params.id 
         },
       });
 
-      const productTagIdArr = req.body.tagIds.map((tag_id) => {
+      const productTagIdArr = tags.map((tag) => {
         return {
           product_id: req.params.id,
-          tag_id,
+          tag_id: tag.id,
         };
       });
       
