@@ -6,6 +6,8 @@
 
 This is a E-Commerce Back End Application that uses Express.js, MySQL, MySQL2 and Sequelize. This application comes with seeds for testing and expirementing with the database. The app allows for the creation of Categories, Products and Tags for an E-Commerce site. All testing in the video provided is done through the app Insomnia.
 
+https://drive.google.com/file/d/1UHbYnv5G7DnPmJnklfP1mvqyawJY50bo/view?usp=drive_link
+
 ## Table of Contents
 
 - [Installation](#installation)
